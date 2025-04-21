@@ -1,0 +1,33 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+}
+
+@model List<IonLineMonitoringApp.Models.ShiftData>
+
+<h2>Daily KPIs</h2>
+<canvas id="chart" height="100"></canvas>
+
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script>
+    var ctx = document.getElementById('chart').getContext('2d');
+    var chart = new Chart(ctx, {
+        type: 'bar',
+        data: {
+            labels: @Html.Raw(Json.Serialize(Model.Select(x => x.Date))),
+            datasets: [
+                {
+                    label: 'Total Production',
+                    data: @Html.Raw(Json.Serialize(Model.Select(x => x.TotalProduction))),
+                    backgroundColor: 'blue'
+                },
+                {
+                    label: 'Total Energy',
+                    data: @Html.Raw(Json.Serialize(Model.Select(x => x.TotalEnergy))),
+                    backgroundColor: 'red'
+                }
+            ]
+        }
+    });
+</script>

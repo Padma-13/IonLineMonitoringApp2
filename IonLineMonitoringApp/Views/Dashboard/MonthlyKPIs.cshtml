@@ -1,0 +1,28 @@
+﻿@model List<IonLineMonitoringApp.Models.ViewModels.MonthlyKPIViewModel>
+@{
+    ViewData["Title"] = "Monthly KPIs";
+}
+
+<h2>Monthly KPIs (@Model.FirstOrDefault()?.Month / @Model.FirstOrDefault()?.Year)</h2>
+
+<table class="table table-bordered">
+    <thead class="table-dark">
+        <tr>
+            <th>Line</th>
+            <th>Product</th>
+            <th>Total Production</th>
+            <th>Total Energy (kWh)</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>@item.LineName</td>
+                <td>@item.ProductName</td>
+                <td>@item.TotalProduction</td>
+                <td>@item.TotalEnergy</td>
+            </tr>
+        }
+    </tbody>
+</table>
